@@ -25,9 +25,9 @@ def get_headers(request):
 
 def source_version(request):
     """Read from source_tip.txt"""
-    TIP_FILE = 'app1/source_tip.txt'
+    tip_file = __name__.split('.')[0] + '/source_tip.txt'
     content = 'not specified'
-    if os.path.exists(TIP_FILE):
-        with open(TIP_FILE, 'r') as tip:
+    if os.path.exists(tip_file):
+        with open(tip_file, 'r') as tip:
             content = tip.read()
     return HttpResponse(content)
