@@ -1,10 +1,13 @@
 import datetime
+import logging
 import time
 import os.path
 
 from django.utils import timezone
 from django.http import HttpResponse
 
+
+logger = logging.getLogger(__name__)
 
 def current_datetime():
     now = datetime.datetime.now()
@@ -13,6 +16,7 @@ def current_datetime():
 
 
 def index(request):
+    logger.debug('index call, return times')
     return current_datetime()
 
 

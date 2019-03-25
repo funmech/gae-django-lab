@@ -123,3 +123,27 @@ USE_TZ = True
 if os.getenv('GAE_INSTANCE'):
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'default': {
+            'format': '%(levelname)s: %(module)s (%(lineno)d): %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'default'
+        },
+    },
+    'loggers': {
+        'django.server':{
+            'handlers': ['console'],
+        },
+        'app1':{
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        }
+    }
+}
