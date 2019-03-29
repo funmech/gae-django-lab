@@ -147,3 +147,9 @@ LOGGING = {
         }
     }
 }
+
+from django.templatetags.static import static
+from django.utils.functional import lazy
+
+static_lazy = lazy(static, str)
+OAUTH2_REDIRECT_URL = static_lazy('app1/oauth2-redirect.html')

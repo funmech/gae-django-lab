@@ -1,10 +1,12 @@
 import datetime
 import logging
-import time
+import os
 import os.path
+import time
 
 from django.utils import timezone
 from django.http import HttpResponse
+from django.conf import settings
 
 
 logger = logging.getLogger(__name__)
@@ -27,6 +29,11 @@ def get_headers(request):
     return HttpResponse('\n'.join(headers))
 
 
+def display_envs(request):
+    envs = ['%s: %s' % (k, v) for k, v in os.environ.items()]
+    return HttpResponse('\n'.join(envs))
+
+
 def source_version(request):
     """Read from source_tip.txt"""
     tip_file = __name__.split('.')[0] + '/source_tip.txt'
@@ -35,3 +42,14 @@ def source_version(request):
         with open(tip_file, 'r') as tip:
             content = tip.read()
     return HttpResponse(content)
+
+
+def oauth(request):
+    host =  os.getenv('GAE_SERVICE', '') + '-' + os.getenv('GAE_VERSION', '')
+    if host.strip() == '-':
+        host = 'localhost is your taget?'
+    return HttpResponse(F"You have been redirected to here to see your host: {host}")
+
+def oauth_redirect(request):
+    logger.debug(settings.OAUTH2_REDIRECT_URL)
+    return HttpResponse(F"This is your redirect url set in settings {settings.OAUTH2_REDIRECT_URL}")
