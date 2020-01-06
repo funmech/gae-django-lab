@@ -1,6 +1,7 @@
 .idea
+.vscode
 .DS_Store
-*.pyc
+__pycache__
 db.sqlite3
 envs/
 source_tip.txt

@@ -8,5 +8,6 @@ urlpatterns = [
     path('version', views.source_version, name='version'),
     path('envs', views.display_envs, name='envs'),
     path('oauth', views.oauth, name='oauth'),
-    path('redirect_url', views.oauth_redirect, name='oauth_redirect_url')
+    path('redirect_url', views.oauth_redirect, name='oauth_redirect_url'),
+    path('client', views.client, name='request_context_client')
 ]
